@@ -23,11 +23,24 @@ public class AcademicYearUtils {
         return startYear + "-" + (startYear + 1);
     }
 
+    public static String resolveAcademicYearForDate(LocalDate date) {
+        if (date == null) {
+            return resolveAcademicYear(null);
+        }
+
+        int year = date.getYear();
+        int month = date.getMonthValue();
+
+        // Năm học bắt đầu từ tháng 8
+        int startYear = (month >= 8) ? year : year - 1;
+        return startYear + "-" + (startYear + 1);
+    }
+
     public static Pair<String, String> splitSemesterAndYear(String input) {
         if (input == null) return null;
 
         // chuẩn hóa dấu gạch nối
-        String normalized = input.replace("–", "-");
+        String normalized = input.replace("–", "-").trim();
 
         // Regex: tách theo dấu "-" nhưng lấy đúng nhóm 2 bên
         Pattern pattern = Pattern.compile("^(.+?)\\s*-\\s*(\\d{4}-\\d{4})$");

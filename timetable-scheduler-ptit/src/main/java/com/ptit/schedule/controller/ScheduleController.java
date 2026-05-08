@@ -45,13 +45,6 @@ public class ScheduleController {
             throw new InvalidDataException("Danh sách lịch học không được rỗng");
         }
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = (User) authentication.getPrincipal();
-
-        if (currentUser == null) {
-            throw new ResourceNotFoundException("Không tìm thấy thông tin người dùng");
-        }
-
         // Convert DTO to Entity and attach TKBTemplate
         List<Schedule> schedules = new ArrayList<>();
         for (SaveScheduleRequest request : scheduleRequests) {
@@ -105,11 +98,22 @@ public class ScheduleController {
                     .specialSystem(request.getSpecialSystem())
                     .siSoMotLop(request.getSiSoMotLop()) // Lưu sĩ số một lớp từ FE
                     .room(room) // Gắn Room entity (null nếu không tìm thấy)
-                    .user(currentUser)
+                    .user(null) // set after auth resolved
                     .tkbTemplate(template) // Gắn template vào schedule
                     .build();
 
             schedules.add(schedule);
+        }
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !(authentication.getPrincipal() instanceof User)) {
+            throw new ResourceNotFoundException("Không tìm thấy thông tin người dùng");
+        }
+
+        User currentUser = (User) authentication.getPrincipal();
+
+        for (Schedule schedule : schedules) {
+            schedule.setUser(currentUser);
         }
 
         scheduleService.saveAll(schedules);
