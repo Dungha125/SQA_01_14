@@ -1,0 +1,78 @@
+spring:
+  devtools:
+    restart:
+      enabled: false
+
+  application:
+    name: ${APP_NAME:schedule}
+
+  datasource:
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/schedule?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8}
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:123456}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:update} # validate để Flyway quản lý schema
+    show-sql: ${JPA_SHOW_SQL:false}
+    properties:
+      hibernate:
+        dialect: ${HIBERNATE_DIALECT:org.hibernate.dialect.MySQL8Dialect}
+        format_sql: ${HIBERNATE_FORMAT_SQL:true}
+
+  flyway:
+    enabled: ${FLYWAY_ENABLED:true}
+    baseline-on-migrate: ${FLYWAY_BASELINE_ON_MIGRATE:true}
+    baseline-version: ${FLYWAY_BASELINE_VERSION:0}
+    locations: ${FLYWAY_LOCATIONS:classpath:db/migration}
+    validate-on-migrate: ${FLYWAY_VALIDATE_ON_MIGRATE:true}
+
+  sql:
+    init:
+      mode: ${SQL_INIT_MODE:never} # Không tự động chạy data.sql
+
+  servlet:
+    multipart:
+      max-file-size: ${MAX_FILE_SIZE:10MB}
+      max-request-size: ${MAX_REQUEST_SIZE:10MB}
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: ${REDIS_TIMEOUT:60000}
+      jedis:
+        pool:
+          max-active: ${REDIS_POOL_MAX_ACTIVE:8}
+          max-idle: ${REDIS_POOL_MAX_IDLE:8}
+          min-idle: ${REDIS_POOL_MIN_IDLE:0}
+          max-wait: ${REDIS_POOL_MAX_WAIT:-1ms}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+api:
+  prefix: ${API_PREFIX:/api/v1}
+
+  fe:
+    url: ${FRONTEND_URL:http://localhost:3000}
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+  expiration: ${JWT_EXPIRATION:86400000} # 24 hours in milliseconds
+
+springdoc:
+  api-docs:
+    path: ${SPRINGDOC_API_DOCS_PATH:/v3/api-docs}
+  swagger-ui:
+    path: ${SPRINGDOC_SWAGGER_UI_PATH:/swagger-ui.html}
+  operationsSorter: ${SPRINGDOC_OPERATIONS_SORTER:method}
+  tagsSorter: ${SPRINGDOC_TAGS_SORTER:alpha}
+
+logging:
+  level:
+    com.ptit.schedule: ${LOG_LEVEL:DEBUG}
+    root: ${ROOT_LOG_LEVEL:INFO}
