@@ -9,7 +9,7 @@ const getApiBaseUrl = () => {
   
   // Nếu đang development (localhost)
   if (import.meta.env.DEV || window.location.hostname === 'localhost') {
-    return 'http://localhost:8080/api'
+    return 'http://localhost:8081/api'
   }
   
   // Production: sử dụng cùng origin với frontend (relative path)
