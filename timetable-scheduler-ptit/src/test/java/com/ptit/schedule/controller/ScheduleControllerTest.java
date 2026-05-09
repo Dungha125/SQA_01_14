@@ -12,6 +12,7 @@ import com.ptit.schedule.repository.RoomRepository;
 import com.ptit.schedule.service.ScheduleService;
 import com.ptit.schedule.service.DataLoaderService;
 import com.ptit.schedule.exception.InvalidDataException;
+import com.ptit.schedule.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.mock.web.MockMultipartFile;
 
 import java.util.*;
 
@@ -116,6 +118,57 @@ class ScheduleControllerTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
         assertThat(response.getBody()).isEqualTo("Đã lưu TKB vào database!");
         verify(scheduleService).saveAll(anyList());
+    }
+
+    @Test
+    @DisplayName("LL-01a: Lưu lịch: ném lỗi khi thiếu authentication (valid input)")
+    void saveSchedule_shouldThrowWhenAuthenticationMissing() {
+        // valid request to get past request validation
+        SaveScheduleRequest request1 = SaveScheduleRequest.builder()
+                .subjectId(100L)
+                .templateDatabaseId(200L)
+                .roomNumber("401-A1")
+                .build();
+
+        // mock references to avoid JPA issues before auth check
+        when(subjectRepository.getReferenceById(100L)).thenReturn(Subject.builder().id(100L).build());
+        when(tkbTemplateRepository.getReferenceById(200L)).thenReturn(TKBTemplate.builder().id(200L).build());
+        when(roomRepository.findByNameAndBuilding("401", "A1")).thenReturn(Optional.empty());
+
+        System.out.println("INPUT: authentication=null");
+        Throwable thrown = catchThrowable(() -> scheduleController.saveSchedule(List.of(request1)));
+        System.out.println("OUTPUT: thrown=" + thrown);
+        assertThat(thrown).isInstanceOf(ResourceNotFoundException.class);
+    }
+
+    @Test
+    @DisplayName("LL-01b: Lưu lịch: fallback tìm phòng theo name khi roomNumber không có '-'")
+    void saveSchedule_shouldFallbackFindRoomByNameWhenNoDash() {
+        setupSecurityContext();
+
+        Subject subject = Subject.builder().id(100L).build();
+        TKBTemplate template = TKBTemplate.builder().id(200L).build();
+        Room room = Room.builder().id(9L).name("R401A1").building("NA").build();
+
+        when(subjectRepository.getReferenceById(100L)).thenReturn(subject);
+        when(tkbTemplateRepository.getReferenceById(200L)).thenReturn(template);
+        when(roomRepository.findByName("R401A1")).thenReturn(Optional.of(room));
+
+        SaveScheduleRequest req = SaveScheduleRequest.builder()
+                .subjectId(100L)
+                .templateDatabaseId(200L)
+                .roomNumber("R401A1")
+                .build();
+
+        ResponseEntity<String> response = scheduleController.saveSchedule(List.of(req));
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+
+        @SuppressWarnings("unchecked")
+        ArgumentCaptor<List<Schedule>> captor = ArgumentCaptor.forClass(List.class);
+        verify(scheduleService).saveAll(captor.capture());
+        assertThat(captor.getValue()).hasSize(1);
+        assertThat(captor.getValue().get(0).getRoom()).isNotNull();
+        assertThat(captor.getValue().get(0).getRoom().getId()).isEqualTo(9L);
     }
 
     @Test
@@ -325,6 +378,28 @@ class ScheduleControllerTest {
     }
 
     @Test
+    @DisplayName("LL-12a: Generate TKB batch: tự set userId từ auth khi thiếu")
+    void generateSchedule_shouldSetUserIdFromAuthWhenMissing() {
+        setupSecurityContext();
+
+        TKBBatchRequest request = TKBBatchRequest.builder()
+                .userId(null)
+                .academicYear("2024-2025")
+                .semester("HK1")
+                .items(List.of(TKBRequest.builder().ma_mon("INT1001").sotiet(30).build()))
+                .build();
+
+        when(scheduleService.generateSchedule(any(TKBBatchRequest.class))).thenReturn(new TKBBatchResponse());
+
+        ResponseEntity<TKBBatchResponse> response = scheduleController.generateSchedule(request);
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+
+        ArgumentCaptor<TKBBatchRequest> captor = ArgumentCaptor.forClass(TKBBatchRequest.class);
+        verify(scheduleService).generateSchedule(captor.capture());
+        assertThat(captor.getValue().getUserId()).isEqualTo(1L);
+    }
+
+    @Test
     @DisplayName("LL-13: Generate TKB batch: ném lỗi khi request null")
     void generateSchedule_shouldThrowWhenRequestIsNull() {
         assertThatThrownBy(() -> scheduleController.generateSchedule(null))
@@ -456,6 +531,42 @@ class ScheduleControllerTest {
         assertThat(body.isSuccess()).isTrue();
         assertThat(body.getMessage()).isEqualTo("Reset lastSlotIdx thành công");
         verify(scheduleService).resetLastSlotIndexRedis(10L, "2024-2025", "HK1");
+    }
+
+    @Test
+    @DisplayName("LL-22: Import data: validate file empty/semester/extension")
+    void importDataTemplate_shouldValidateInputs() {
+        MockMultipartFile emptyFile = new MockMultipartFile("file", "tkb.xlsx",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", new byte[0]);
+
+        assertThatThrownBy(() -> scheduleController.importDataTemplate(emptyFile, "HK1"))
+                .isInstanceOf(InvalidDataException.class)
+                .hasMessageContaining("File không được để trống");
+
+        MockMultipartFile okFile = new MockMultipartFile("file", "tkb.xlsx",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", new byte[]{1});
+
+        assertThatThrownBy(() -> scheduleController.importDataTemplate(okFile, ""))
+                .isInstanceOf(InvalidDataException.class)
+                .hasMessageContaining("Học kỳ không được để trống");
+
+        MockMultipartFile badExt = new MockMultipartFile("file", "tkb.txt", "text/plain", new byte[]{1});
+        assertThatThrownBy(() -> scheduleController.importDataTemplate(badExt, "HK1"))
+                .isInstanceOf(InvalidDataException.class)
+                .hasMessageContaining("File phải có định dạng Excel");
+    }
+
+    @Test
+    @DisplayName("LL-23: Import data: success returns json filename")
+    void importDataTemplate_shouldReturnSuccess() {
+        MockMultipartFile file = new MockMultipartFile("file", "tkb.xlsx",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", new byte[]{1});
+        when(dataLoaderService.importDataFromExcel(any(), eq("HK1"))).thenReturn("HK1_2024-2025.json");
+
+        ResponseEntity<ApiResponse<Map<String, Object>>> res = scheduleController.importDataTemplate(file, "HK1");
+        assertThat(res.getStatusCodeValue()).isEqualTo(200);
+        assertThat(res.getBody().isSuccess()).isTrue();
+        assertThat(res.getBody().getData().get("jsonFile")).isEqualTo("HK1_2024-2025.json");
     }
 
 }

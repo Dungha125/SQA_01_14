@@ -168,6 +168,16 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
                 <configuration>
+                    <includes>
+                        <!-- Scheduling module only -->
+                        <include>com/ptit/schedule/controller/*Schedule*</include>
+                        <include>com/ptit/schedule/service/*Schedule*</include>
+                        <include>com/ptit/schedule/service/impl/*Schedule*</include>
+                        <include>com/ptit/schedule/entity/Schedule*</include>
+                        <include>com/ptit/schedule/entity/TKBTemplate*</include>
+                        <include>com/ptit/schedule/repository/Schedule*</include>
+                        <include>com/ptit/schedule/repository/TKBTemplate*</include>
+                    </includes>
                     <excludes>
                         <exclude>**/config/**</exclude>
                         <exclude>**/dto/**</exclude>
