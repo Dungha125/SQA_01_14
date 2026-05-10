@@ -9,7 +9,7 @@ spring:
   datasource:
     url: ${DATABASE_URL:jdbc:mysql://localhost:3306/schedule?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8}
     username: ${DATABASE_USERNAME:root}
-    password: ${DATABASE_PASSWORD:120504}
+    password: ${DATABASE_PASSWORD:Bawkbak12@}
 
   jpa:
     hibernate:
