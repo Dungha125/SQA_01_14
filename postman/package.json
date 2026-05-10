@@ -1,0 +1,17 @@
+{
+  "name": "ptit-be-postman-newman",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "generate": "python jmx_to_postman_collection.py",
+    "generate:disabled": "python jmx_to_postman_collection.py --include-disabled",
+    "run": "newman run PTIT-BE.auto.postman_collection.json -e local.auto.postman_environment.json --delay-request 20",
+    "run:verbose": "newman run PTIT-BE.auto.postman_collection.json -e local.auto.postman_environment.json --delay-request 20 --verbose",
+    "run:cli": "newman run PTIT-BE.auto.postman_collection.json -e local.auto.postman_environment.json --delay-request 20 --reporters cli,junit --reporter-junit-export newman-results.xml",
+    "html": "newman run PTIT-BE.auto.postman_collection.json -e local.auto.postman_environment.json --delay-request 20 --reporters cli,htmlextra --reporter-htmlextra-export newman-report.html"
+  },
+  "devDependencies": {
+    "newman": "^6.2.1",
+    "newman-reporter-htmlextra": "^1.23.1"
+  }
+}

@@ -1,0 +1,1434 @@
+{
+  "info": {
+    "name": "PTIT BE auto (from JMeter JMX)",
+    "description": "Thứ tự request khớp JMeter Thread Group. POST /api/auth/login lưu `token`. Đổi baseUrl và biến trong Environment.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1 — Theo thứ tự JMeter (full)",
+      "item": [
+        {
+          "name": "GET /api/majors (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/majors"
+          }
+        },
+        {
+          "name": "GET /api/faculties/health (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/faculties/health"
+          }
+        },
+        {
+          "name": "GET /api/faculties (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/faculties"
+          }
+        },
+        {
+          "name": "GET /api/faculties/{id} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/faculties/{{facultyId}}"
+          }
+        },
+        {
+          "name": "POST /api/faculties (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/faculties",
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"facultyName\": \"Công nghệ thông tin 2\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PUT /api/faculties/{id} (requires token)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/faculties/{{facultyId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"facultyName\":\"Công nghệ thông tin 1\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /api/semesters (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/semesters"
+          }
+        },
+        {
+          "name": "GET /api/semesters/{id} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/semesters/{{semesterId}}"
+          }
+        },
+        {
+          "name": "GET /api/semesters/name/{semesterName} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/semesters/name/{{semesterName}}"
+          }
+        },
+        {
+          "name": "GET /api/semesters/active (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/semesters/active"
+          }
+        },
+        {
+          "name": "GET /api/semesters/names (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/semesters/names"
+          }
+        },
+        {
+          "name": "POST /api/semesters (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/semesters",
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"semesterName\": \"HK_JM_{{__time(ddHHmmss)}}\", \"academicYear\": \"2024-2025\", \"isActive\": false, \"description\": \"jmeter\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PUT /api/semesters/{id} (requires token)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/semesters/{{semesterId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"semesterName\":\"Học kỳ 1\",\"academicYear\":\"2025-2026\",\"startDate\":\"2025-09-01\",\"endDate\":\"2025-12-31\",\"isActive\":true,\"description\":\"HK1\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PATCH /api/semesters/{id}/activate (requires token)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/semesters/{{semesterId}}/activate"
+          }
+        },
+        {
+          "name": "POST /api/subjects/upload-excel (multipart, requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/upload-excel",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "{{FULL_CT_XLSX}}"
+                },
+                {
+                  "key": "semester",
+                  "type": "text",
+                  "value": "{{SEMESTER_UPLOAD}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const _k = \"FULL_CT_XLSX\";",
+                  "const _pk = \"file\";",
+                  "const pth = pm.environment.get(_k) || pm.collectionVariables.get(_k);",
+                  "if (!pth) { console.warn(\"Missing path for \" + _k); return; }",
+                  "if (pm.request.body && pm.request.body.mode === \"formdata\" && pm.request.body.formdata) {",
+                  "    const fd = pm.request.body.formdata;",
+                  "    fd.remove(_pk);",
+                  "    fd.append({ key: _pk, type: \"file\", src: pth });",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/subjects/health (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/health"
+          }
+        },
+        {
+          "name": "GET /api/subjects (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects"
+          }
+        },
+        {
+          "name": "GET /api/subjects/major/{majorId} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/major/{{majorId}}"
+          }
+        },
+        {
+          "name": "GET /api/subjects/majors (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/majors?academicYear={{academicYear}}&classYear={{classYear}}&majorCodes={{major}}&programType={{programType}}&semesterName={{semesterName}}"
+          }
+        },
+        {
+          "name": "GET /api/subjects/program-types (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/program-types"
+          }
+        },
+        {
+          "name": "GET /api/subjects/class-years (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/class-years"
+          }
+        },
+        {
+          "name": "POST /api/subjects (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"subjectCode\": \"INT14149\",\r\n    \"subjectName\": \"IoT và ứng dụng\",\r\n    \"studentsPerClass\": 50,\r\n    \"numberOfClasses\": 2,\r\n    \"credits\": 3,\r\n    \"theoryHours\": 30,\r\n    \"exerciseHours\": 0,\r\n    \"projectHours\": 0,\r\n    \"labHours\": 0,\r\n    \"selfStudyHours\": 0,\r\n    \"department\": \"CNTT\",\r\n    \"examFormat\": \"Thi viết\",\r\n    \"classYear\": \"2024\",\r\n    \"facultyId\": \"CN1\",\r\n    \"majorId\": \"major-id\",\r\n    \"majorName\": null,\r\n    \"programType\": \"Đại trà\",\r\n    \"numberOfStudents\": 100,\r\n    \"semesterName\": \"Học kỳ 1\",\r\n    \"academicYear\": \"2025-2026\",\r\n    \"isCommon\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PUT /api/subjects/{id} (requires token)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/{{subjectId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"subjectCode\": \"INT14149\",\r\n    \"subjectName\": \"IoT và ứng dụng Nhật Bản\",\r\n    \"studentsPerClass\": 50,\r\n    \"numberOfClasses\": 2,\r\n    \"credits\": 3,\r\n    \"theoryHours\": 30,\r\n    \"exerciseHours\": 0,\r\n    \"projectHours\": 0,\r\n    \"labHours\": 0,\r\n    \"selfStudyHours\": 0,\r\n    \"department\": \"CNTT\",\r\n    \"examFormat\": \"Thi viết\",\r\n    \"classYear\": \"2024\",\r\n    \"facultyId\": \"CN1\",\r\n    \"majorId\": \"major-id\",\r\n    \"majorName\": null,\r\n    \"programType\": \"Đại trà\",\r\n    \"numberOfStudents\": 100,\r\n    \"semesterName\": \"Học kỳ 1\",\r\n    \"academicYear\": \"2025-2026\",\r\n    \"isCommon\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /api/subjects/group-majors (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/group-majors?academicYear=2025-2026&classYear=2024&programType=CLC&semesterName=H%E1%BB%8Dc+k%E1%BB%B3+1"
+          }
+        },
+        {
+          "name": "GET /api/subjects/common-subjects (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/common-subjects?academicYear=2025-2026&semesterName=H%E1%BB%8Dc+k%E1%BB%B3+1"
+          }
+        },
+        {
+          "name": "POST /api/schedules/import-data (multipart, requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/import-data",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "{{DATA_XLSX}}"
+                },
+                {
+                  "key": "semester",
+                  "type": "text",
+                  "value": "{{SEMESTER_UPLOAD}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const _k = \"DATA_XLSX\";",
+                  "const _pk = \"file\";",
+                  "const pth = pm.environment.get(_k) || pm.collectionVariables.get(_k);",
+                  "if (!pth) { console.warn(\"Missing path for \" + _k); return; }",
+                  "if (pm.request.body && pm.request.body.mode === \"formdata\" && pm.request.body.formdata) {",
+                  "    const fd = pm.request.body.formdata;",
+                  "    fd.remove(_pk);",
+                  "    fd.append({ key: _pk, type: \"file\", src: pth });",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /api/schedule-validation/validate-format (multipart, requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedule-validation/validate-format",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "{{BOOK1_XLSX}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const _k = \"BOOK1_XLSX\";",
+                  "const _pk = \"file\";",
+                  "const pth = pm.environment.get(_k) || pm.collectionVariables.get(_k);",
+                  "if (!pth) { console.warn(\"Missing path for \" + _k); return; }",
+                  "if (pm.request.body && pm.request.body.mode === \"formdata\" && pm.request.body.formdata) {",
+                  "    const fd = pm.request.body.formdata;",
+                  "    fd.remove(_pk);",
+                  "    fd.append({ key: _pk, type: \"file\", src: pth });",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /api/schedule-validation/analyze (multipart, requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedule-validation/analyze",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "{{BOOK1_XLSX}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const _k = \"BOOK1_XLSX\";",
+                  "const _pk = \"file\";",
+                  "const pth = pm.environment.get(_k) || pm.collectionVariables.get(_k);",
+                  "if (!pth) { console.warn(\"Missing path for \" + _k); return; }",
+                  "if (pm.request.body && pm.request.body.mode === \"formdata\" && pm.request.body.formdata) {",
+                  "    const fd = pm.request.body.formdata;",
+                  "    fd.remove(_pk);",
+                  "    fd.append({ key: _pk, type: \"file\", src: pth });",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/schedule-validation/conflicts/{type} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedule-validation/conflicts/{{conflictType}}"
+          }
+        },
+        {
+          "name": "POST /api/schedules/generate-batch (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/generate-batch",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"items\": [\r\n        {\r\n            \"ma_mon\": \"SKD1102\",\r\n            \"ten_mon\": \"Kỹ năng làm việc nhóm\",\r\n            \"sotiet\": 30,\r\n            \"siso\": 100,\r\n            \"siso_mot_lop\": 50,\r\n            \"solop\": 2,\r\n            \"nganh\": \"Chung\",\r\n            \"subject_type\": \"general\",\r\n            \"student_year\": \"2024\",\r\n            \"he_dac_thu\": \"CLC\",\r\n            \"academic_year\": \"2025-2026\",\r\n            \"semester\": \"1\"\r\n        }\r\n    ],\r\n    \"userId\": 1,\r\n    \"academicYear\": \"2025-2026\",\r\n    \"semester\": \"1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /api/schedules/save-batch (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/save-batch",
+            "body": {
+              "mode": "raw",
+              "raw": "[]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /api/schedules (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules"
+          }
+        },
+        {
+          "name": "GET /api/schedules/subject/{subjectId} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/subject/{{subjectId}}"
+          }
+        },
+        {
+          "name": "GET /api/schedules/major/{major} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/major/{{major}}"
+          }
+        },
+        {
+          "name": "GET /api/schedules/student-year/{studentYear} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/student-year/{{studentYear}}"
+          }
+        },
+        {
+          "name": "GET /api/schedules/health (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/health"
+          }
+        },
+        {
+          "name": "GET /api/schedules/test-data (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/test-data"
+          }
+        },
+        {
+          "name": "POST /api/schedules/reset (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/reset"
+          }
+        },
+        {
+          "name": "POST /api/schedules/debug-common-subject (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/debug-common-subject"
+          }
+        },
+        {
+          "name": "POST /api/schedules/save-last-slot-idx (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/save-last-slot-idx"
+          }
+        },
+        {
+          "name": "GET /api/rooms (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms"
+          }
+        },
+        {
+          "name": "GET /api/rooms/{id} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/{{roomId}}"
+          }
+        },
+        {
+          "name": "POST /api/rooms (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"411\",\r\n    \"capacity\": 60,\r\n    \"building\": \"A2\",\r\n    \"type\": \"GENERAL\",\r\n    \"floor\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PUT /api/rooms/{id} (requires token)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/{{roomId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"412\",\r\n    \"capacity\": 40,\r\n    \"building\": \"A2\",\r\n    \"type\": \"GENERAL\",\r\n    \"floor\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PATCH /api/rooms/{id}/status (requires token)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/{{roomId}}/status",
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"status\": \"AVAILABLE\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PATCH /api/rooms/bulk-status (requires token)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/bulk-status",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"roomIds\":[1,2,3],\"status\":\"AVAILABLE\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /api/rooms/building/{building} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/building/{{building}}"
+          }
+        },
+        {
+          "name": "GET /api/rooms/status/{status} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/status/{{status}}"
+          }
+        },
+        {
+          "name": "GET /api/rooms/type/{type} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/type/{{type}}"
+          }
+        },
+        {
+          "name": "GET /api/rooms/available?capacity= (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/available?capacity=50"
+          }
+        },
+        {
+          "name": "GET /api/rooms/building/{building}/status/{status} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/building/{{building}}/status/{{status}}"
+          }
+        },
+        {
+          "name": "GET /api/rooms/type/{type}/status/{status} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/type/{{type}}/status/{{status}}"
+          }
+        },
+        {
+          "name": "POST /api/rooms/save-results (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/save-results"
+          }
+        },
+        {
+          "name": "GET /api/rooms/subject-room-mappings (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/subject-room-mappings"
+          }
+        },
+        {
+          "name": "POST /api/rooms/assign-rooms (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/assign-rooms?academicYear={{academicYear}}&semester={{semesterName}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"items\": [ /* TKBBatchItemResponse */],\r\n    \"totalRows\": 0,\r\n    \"totalClasses\": 0,\r\n    \"lastSlotIdx\": 0,\r\n    \"occupiedRoomsCount\": 0,\r\n    \"note\": null,\r\n    \"error\": null,\r\n    \"warningsNoRoom\": []\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /api/admin/users (admin, requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/users"
+          }
+        },
+        {
+          "name": "GET /api/admin/users/{id} (admin, requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/users/{{userId}}"
+          }
+        },
+        {
+          "name": "PATCH /api/admin/users/{id}/toggle-status (admin, requires token)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/users/{{userId}}/toggle-status",
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"enabled\": true }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /api/v1/room-occupancies/room/{roomId} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/room-occupancies/room/{{roomId}}"
+          }
+        },
+        {
+          "name": "GET /api/v1/room-occupancies/room/{roomId}/semester/{semesterId} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/room-occupancies/room/{{roomId}}/semester/{{semesterId}}"
+          }
+        },
+        {
+          "name": "GET /api/v1/room-occupancies/semester/{semesterId} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/room-occupancies/semester/{{semesterId}}"
+          }
+        },
+        {
+          "name": "GET /api/v1/room-occupancies/semester/{semesterId}/statistics (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/room-occupancies/semester/{{semesterId}}/statistics"
+          }
+        },
+        {
+          "name": "GET /api/v1/room-occupancies/check-availability (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/room-occupancies/check-availability?dayOfWeek=2&period=1&roomId=1&semesterId={{semesterId}}"
+          }
+        },
+        {
+          "name": "POST /api/v1/room-occupancies/bulk-create (requires token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/room-occupancies/bulk-create",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"semesterId\": 1,\r\n    \"items\": [\r\n        {\r\n            \"roomId\": 1,\r\n            \"dayOfWeek\": 2,\r\n            \"kip\": 1,\r\n            \"subjectCode\": \"REG30675625940\",\r\n            \"subjectName\": \"Regular Subject 30675625940\"\r\n        },\r\n        {\r\n            \"roomId\": 31,\r\n            \"dayOfWeek\": 3,\r\n            \"kip\": 2,\r\n            \"subjectCode\": \"COM30675625940\",\r\n            \"subjectName\": \"Common Subject 30675625940\"\r\n        },\r\n        {\r\n            \"roomId\": 31,\r\n            \"dayOfWeek\": 5,\r\n            \"kip\": 4,\r\n            \"subjectCode\": \"DEL30675625940\",\r\n            \"subjectName\": \"Delete Subject 30675625940\"\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /api/v1/room-occupancies/rooms-status/semester/{semesterId} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/room-occupancies/rooms-status/semester/{{semesterId}}"
+          }
+        },
+        {
+          "name": "GET /api/v1/room-occupancies/room/{roomId}/status/semester/{semesterId} (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/room-occupancies/room/{{roomId}}/status/semester/{{semesterId}}"
+          }
+        },
+        {
+          "name": "GET /api/v1/room-occupancies/available-rooms (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/room-occupancies/available-rooms?dayOfWeek=2&period=1&semesterId={{semesterId}}"
+          }
+        },
+        {
+          "name": "DELETE /api/faculties/{id} (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/faculties/{{facultyId}}"
+          }
+        },
+        {
+          "name": "DELETE /api/subjects/{id} (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/{{subjectId}}"
+          }
+        },
+        {
+          "name": "DELETE /api/subjects/semester-name/{semesterName} (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/semester-name/{{semesterNameDelete}}"
+          }
+        },
+        {
+          "name": "DELETE /api/subjects/semester-name/{semesterName}/academic-year/{academicYear} (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/subjects/semester-name/{{semesterNameDelete2}}/academic-year/2024-2025"
+          }
+        },
+        {
+          "name": "DELETE /api/v1/room-occupancies/semester/{semesterId} (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/room-occupancies/semester/{{semesterId}}"
+          }
+        },
+        {
+          "name": "DELETE /api/schedules/reset-last-slot-idx-redis (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/reset-last-slot-idx-redis?academicYear=2025-2026&semester=1&userId=1"
+          }
+        },
+        {
+          "name": "DELETE /api/schedules/{id} (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules/{{scheduleId}}"
+          }
+        },
+        {
+          "name": "DELETE /api/schedules (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/schedules"
+          }
+        },
+        {
+          "name": "DELETE /api/rooms/{id} (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/{{roomId}}"
+          }
+        },
+        {
+          "name": "DELETE /api/rooms/subject-room-mappings (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/subject-room-mappings"
+          }
+        },
+        {
+          "name": "DELETE /api/rooms/subject-room-mappings/{maMon} (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/rooms/subject-room-mappings/{{maMon}}"
+          }
+        },
+        {
+          "name": "DELETE /api/semesters/{id} (requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/semesters/{{semesterId}}"
+          }
+        },
+        {
+          "name": "POST /api/auth/login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\":\"{{username_login}}\",\"password\":\"{{password_login}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "try {",
+                  "  var j = pm.response.json();",
+                  "  if (j && j.data && j.data.token)",
+                  "    pm.collectionVariables.set(\"token\", j.data.token);",
+                  "} catch (e) { }"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "DELETE /api/admin/users/{id} (admin, requires token)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/users/{{userId}}"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "username_login",
+      "value": "admin",
+      "type": "string"
+    },
+    {
+      "key": "password_login",
+      "value": "admin123",
+      "type": "string"
+    }
+  ]
+}
