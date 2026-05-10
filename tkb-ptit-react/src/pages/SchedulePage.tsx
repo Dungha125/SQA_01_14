@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Play, Loader, Upload, HelpCircle, FileText, ArrowRight } from 'lucide-react'
 import { subjectService, roomService, semesterService, type SubjectByMajor, type Semester } from '../services/api'
-import api from '../services/api'
+import api, { multipartRequestConfig } from '../services/api'
 import toast from 'react-hot-toast'
 import ImportFileModal from '../components/ImportFileModal'
 import NotificationModal from '../components/NotificationModal'
@@ -1245,11 +1245,7 @@ const TKBPage = () => {
       formData.append('file', file)
       formData.append('semester', semester)
 
-      const response = await api.post('/schedules/import-data', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
+      const response = await api.post('/schedules/import-data', formData, multipartRequestConfig)
 
       if (response.data?.success) {
         const data = response.data.data

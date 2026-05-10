@@ -23,6 +23,25 @@ id = VALUES(id),
 faculty_name = VALUES(faculty_name);
 
 
+-- Học kỳ tham chiếu HK1 / 2024-2025 — trùng với AdditionalTestDataSeed & SEMESTER_UPLOAD của JMeter
+-- Khóa chính id=1 giúp JMeter mặc định semesterId=1 và GET /api/semesters/1 khớp trên DB sạch.
+INSERT INTO semesters (id, semester_name, academic_year, start_date, end_date, is_active, description)
+VALUES (1, 'HK1', '2024-2025', DATE '2024-09-02', DATE '2025-01-31', TRUE, 'Seed data.sql')
+ON DUPLICATE KEY UPDATE
+    semester_name = VALUES(semester_name),
+    academic_year = VALUES(academic_year),
+    start_date = VALUES(start_date),
+    end_date = VALUES(end_date),
+    is_active = VALUES(is_active),
+    description = VALUES(description);
+
+-- GET /api/subjects/common-subjects cần ít nhất một subject có is_common = TRUE (cùng HK1 / 2024-2025).
+-- Bản ghi mã SEEDCOM được tạo idempotent khi khởi động app: com.ptit.schedule.config.AdditionalTestDataSeed
+
+-- Nếu khoa CN1 đã bị smoke test DELETE (DB vẫn có bản ghi khác → không chạy lại toàn bộ script), INSERT IGNORE khôi phục được.
+INSERT IGNORE INTO faculties (id, faculty_name) VALUES ('CN1', 'Công nghệ thông tin');
+
+
 -- Insert dữ liệu phòng học với id cụ thể
 INSERT INTO rooms (id, name, capacity, building, type, status, note) VALUES
 (1, '301', 36, 'A1', 'CLC', 'AVAILABLE', 'Lớp CLC 2024'),

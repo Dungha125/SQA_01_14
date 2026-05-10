@@ -1,0 +1,56 @@
+2026-05-09 19:00:43,870 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2026-05-09 19:00:43,895 INFO o.a.j.JMeter: Loading user properties from: C:\Users\dungh\AppData\Local\Programs\JMeter\bin\user.properties
+2026-05-09 19:00:43,896 INFO o.a.j.JMeter: Loading system properties from: C:\Users\dungh\AppData\Local\Programs\JMeter\bin\system.properties
+2026-05-09 19:00:43,906 INFO o.a.j.JMeter: Copyright (c) 1998-2024 The Apache Software Foundation
+2026-05-09 19:00:43,906 INFO o.a.j.JMeter: Version 5.6.3
+2026-05-09 19:00:43,906 INFO o.a.j.JMeter: java.version=21.0.11
+2026-05-09 19:00:43,906 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2026-05-09 19:00:43,906 INFO o.a.j.JMeter: os.name=Windows 11
+2026-05-09 19:00:43,906 INFO o.a.j.JMeter: os.arch=amd64
+2026-05-09 19:00:43,906 INFO o.a.j.JMeter: os.version=10.0
+2026-05-09 19:00:43,906 INFO o.a.j.JMeter: file.encoding=UTF-8
+2026-05-09 19:00:43,906 INFO o.a.j.JMeter: java.awt.headless=true
+2026-05-09 19:00:43,906 INFO o.a.j.JMeter: Max memory     =1073741824
+2026-05-09 19:00:43,906 INFO o.a.j.JMeter: Available Processors =12
+2026-05-09 19:00:43,919 INFO o.a.j.JMeter: Default Locale=English (EN)
+2026-05-09 19:00:43,920 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2026-05-09 19:00:43,920 INFO o.a.j.JMeter: JMeterHome=C:\Users\dungh\AppData\Local\Programs\JMeter
+2026-05-09 19:00:43,920 INFO o.a.j.JMeter: user.dir  =E:\DEV\DBCLPM
+2026-05-09 19:00:43,920 INFO o.a.j.JMeter: PWD       =E:\DEV\DBCLPM
+2026-05-09 19:00:43,922 INFO o.a.j.JMeter: IP: 100.90.149.23 Name: Dungha FullName: dungha.tail1f3c17.ts.net.
+2026-05-09 19:00:43,940 INFO o.a.j.s.FileServer: Default base='E:\DEV\DBCLPM'
+2026-05-09 19:00:43,942 INFO o.a.j.s.FileServer: Set new base='E:\DEV\DBCLPM\jmeter'
+2026-05-09 19:00:44,163 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2026-05-09 19:00:44,199 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2026-05-09 19:00:44,204 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2026-05-09 19:00:44,207 INFO o.a.j.s.SaveService: Loading file: E:\DEV\DBCLPM\jmeter\ptit-be-endpoints.jmx
+2026-05-09 19:00:44,303 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-05-09 19:00:44,303 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-05-09 19:00:44,303 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-05-09 19:00:44,304 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-05-09 19:00:44,305 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2026-05-09 19:00:44,305 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2026-05-09 19:00:44,584 INFO o.a.j.JMeter: Creating summariser <summary>
+2026-05-09 19:00:44,603 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2026-05-09 19:00:44,604 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2026-05-09 19:00:44,604 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2026-05-09 19:00:44,608 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2026-05-09 19:00:44,609 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2026-05-09 19:00:44,702 INFO o.a.j.JMeter: Running test (1778328044702)
+2026-05-09 19:00:44,718 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Thread Group
+2026-05-09 19:00:44,719 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Thread Group.
+2026-05-09 19:00:44,719 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2026-05-09 19:00:44,719 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2026-05-09 19:00:44,725 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2026-05-09 19:00:44,726 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2026-05-09 19:00:44,729 INFO o.a.j.t.JMeterThread: Thread started: Thread Group 1-1
+2026-05-09 19:00:44,746 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = Dungha
+2026-05-09 19:00:44,756 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2026-05-09 19:00:44,758 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2026-05-09 19:00:44,758 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to UTF-8
+2026-05-09 19:00:44,758 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2026-05-09 19:00:44,758 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2026-05-09 19:00:45,507 INFO o.a.j.t.JMeterThread: Thread is done: Thread Group 1-1
+2026-05-09 19:00:45,507 INFO o.a.j.t.JMeterThread: Thread finished: Thread Group 1-1
+2026-05-09 19:00:45,508 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2026-05-09 19:00:45,510 INFO o.a.j.r.Summariser: summary =     45 in 00:00:01 =   55.8/s Avg:    13 Min:     4 Max:   124 Err:     7 (15.56%)

@@ -354,7 +354,9 @@ describe('api.ts — instance, interceptors, services', () => {
     const [url, fd, opts] = mockPost.mock.calls[0]
     expect(url).toBe('/subjects/upload-excel')
     expect(fd).toBeInstanceOf(FormData)
-    expect((opts as { headers: Record<string, string> }).headers['Content-Type']).toBe('multipart/form-data')
+    expect((opts as { transformRequest?: unknown[] }).transformRequest).toEqual(
+      expect.arrayContaining([expect.any(Function)]),
+    )
   })
 
   it('GUI-84: scheduleValidationService', async () => {
@@ -367,7 +369,7 @@ describe('api.ts — instance, interceptors, services', () => {
       '/schedule-validation/validate-format',
       expect.any(FormData),
       expect.objectContaining({
-        headers: { 'Content-Type': 'multipart/form-data' },
+        transformRequest: expect.arrayContaining([expect.any(Function)]),
       }),
     )
     await scheduleValidationService.analyzeSchedule(file)
@@ -375,7 +377,7 @@ describe('api.ts — instance, interceptors, services', () => {
       '/schedule-validation/analyze',
       expect.any(FormData),
       expect.objectContaining({
-        headers: { 'Content-Type': 'multipart/form-data' },
+        transformRequest: expect.arrayContaining([expect.any(Function)]),
       }),
     )
     await scheduleValidationService.getConflictDetails('room', 'A101', 'T1')

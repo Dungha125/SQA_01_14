@@ -1,0 +1,46 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1778328044822,124,POST /api/auth/login,200,,Thread Group 1-1,text,true,,1094,250,1,1,http://localhost:8081/api/auth/login,119,0,29
+1778328044976,8,GET /api/auth/me (requires token),401,,Thread Group 1-1,text,false,,765,389,1,1,http://localhost:8081/api/auth/me,8,0,1
+1778328044986,13,GET /api/majors (requires token),200,,Thread Group 1-1,text,true,,1016,388,1,1,http://localhost:8081/api/majors,13,0,2
+1778328045000,6,GET /api/faculties/health (requires token),200,,Thread Group 1-1,text,true,,696,398,1,1,http://localhost:8081/api/faculties/health,6,0,1
+1778328045007,10,GET /api/faculties (requires token),200,,Thread Group 1-1,text,true,,2517,391,1,1,http://localhost:8081/api/faculties,10,0,2
+1778328045018,9,GET /api/faculties/{id} (requires token),200,,Thread Group 1-1,text,true,,769,395,1,1,http://localhost:8081/api/faculties/CN1,9,0,1
+1778328045028,20,GET /api/semesters (requires token),200,,Thread Group 1-1,text,true,,2009,391,1,1,http://localhost:8081/api/semesters,20,0,2
+1778328045049,12,GET /api/semesters/{id} (requires token),200,,Thread Group 1-1,text,true,,896,393,1,1,http://localhost:8081/api/semesters/4,12,0,1
+1778328045062,16,GET /api/semesters/name/{semesterName} (requires token),404,,Thread Group 1-1,text,false,,809,425,1,1,http://localhost:8081/api/semesters/name/Học%20kỳ%201,15,0,6
+1778328045079,10,GET /api/semesters/active (requires token),200,,Thread Group 1-1,text,true,,907,398,1,1,http://localhost:8081/api/semesters/active,10,0,1
+1778328045091,12,GET /api/semesters/names (requires token),200,,Thread Group 1-1,text,true,,866,397,1,1,http://localhost:8081/api/semesters/names,12,0,2
+1778328045104,8,GET /api/subjects/health (requires token),200,,Thread Group 1-1,text,true,,737,397,1,1,http://localhost:8081/api/subjects/health,7,0,2
+1778328045113,14,GET /api/subjects (requires token),200,,Thread Group 1-1,text,true,,1348,390,1,1,http://localhost:8081/api/subjects,14,0,1
+1778328045128,13,GET /api/subjects/major/{majorId} (requires token),200,,Thread Group 1-1,text,true,,1119,398,1,1,http://localhost:8081/api/subjects/major/1,12,0,1
+1778328045142,13,GET /api/subjects/majors (requires token),200,,Thread Group 1-1,text,true,,797,516,1,1,http://localhost:8081/api/subjects/majors?semesterName=H%E1%BB%8Dc+k%E1%BB%B3+1&academicYear=2024-2025&classYear=2024&programType=Ch%C3%ADnh+quy&majorCodes=CNPM,13,0,1
+1778328045156,10,GET /api/subjects/group-majors (requires token),404,,Thread Group 1-1,text,false,,813,506,1,1,http://localhost:8081/api/subjects/group-majors?semesterName=H%E1%BB%8Dc+k%E1%BB%B3+1&academicYear=2024-2025&classYear=2024&programType=Ch%C3%ADnh+quy,9,0,1
+1778328045167,8,GET /api/subjects/common-subjects (requires token),404,,Thread Group 1-1,text,false,,784,467,1,1,http://localhost:8081/api/subjects/common-subjects?semesterName=H%E1%BB%8Dc+k%E1%BB%B3+1&academicYear=2024-2025,8,0,1
+1778328045176,7,GET /api/subjects/program-types (requires token),200,,Thread Group 1-1,text,true,,793,404,1,1,http://localhost:8081/api/subjects/program-types,7,0,1
+1778328045184,6,GET /api/subjects/class-years (requires token),200,,Thread Group 1-1,text,true,,782,402,1,1,http://localhost:8081/api/subjects/class-years,6,0,1
+1778328045191,10,GET /api/rooms (requires token),200,,Thread Group 1-1,text,true,,18600,387,1,1,http://localhost:8081/api/rooms,10,0,0
+1778328045202,8,GET /api/rooms/{id} (requires token),404,,Thread Group 1-1,text,false,,840,389,1,1,http://localhost:8081/api/rooms/4,8,0,1
+1778328045211,7,GET /api/rooms/building/{building} (requires token),200,,Thread Group 1-1,text,true,,2066,399,1,1,http://localhost:8081/api/rooms/building/A1,7,0,1
+1778328045218,12,GET /api/rooms/status/{status} (requires token),200,,Thread Group 1-1,text,true,,18619,404,1,1,http://localhost:8081/api/rooms/status/AVAILABLE,11,0,1
+1778328045230,10,GET /api/rooms/type/{type} (requires token),200,,Thread Group 1-1,text,true,,2609,396,1,1,http://localhost:8081/api/rooms/type/CLC,9,0,1
+1778328045240,10,GET /api/rooms/available?capacity= (requires token),200,,Thread Group 1-1,text,true,,13927,409,1,1,http://localhost:8081/api/rooms/available?capacity=50,10,0,1
+1778328045251,7,GET /api/rooms/building/{building}/status/{status} (requires token),200,,Thread Group 1-1,text,true,,2084,416,1,1,http://localhost:8081/api/rooms/building/A1/status/AVAILABLE,7,0,1
+1778328045259,7,GET /api/rooms/type/{type}/status/{status} (requires token),200,,Thread Group 1-1,text,true,,2627,413,1,1,http://localhost:8081/api/rooms/type/CLC/status/AVAILABLE,6,0,1
+1778328045266,4,GET /api/rooms/subject-room-mappings (requires token),200,,Thread Group 1-1,text,true,,782,409,1,1,http://localhost:8081/api/rooms/subject-room-mappings,4,0,1
+1778328045271,4,GET /api/schedule-validation/conflicts/{type} (requires token),200,,Thread Group 1-1,text,true,,771,416,1,1,http://localhost:8081/api/schedule-validation/conflicts/room,4,0,1
+1778328045276,5,GET /api/schedules (requires token),200,,Thread Group 1-1,text,true,,684,391,1,1,http://localhost:8081/api/schedules,5,0,0
+1778328045282,5,GET /api/schedules/subject/{subjectId} (requires token),200,,Thread Group 1-1,text,true,,684,404,1,1,http://localhost:8081/api/schedules/subject/1465,5,0,1
+1778328045288,5,GET /api/schedules/major/{major} (requires token),200,,Thread Group 1-1,text,true,,684,402,1,1,http://localhost:8081/api/schedules/major/CNPM,5,0,0
+1778328045293,7,GET /api/schedules/student-year/{studentYear} (requires token),200,,Thread Group 1-1,text,true,,684,409,1,1,http://localhost:8081/api/schedules/student-year/2024,7,0,1
+1778328045301,5,GET /api/schedules/health (requires token),200,,Thread Group 1-1,text,true,,697,398,1,1,http://localhost:8081/api/schedules/health,4,0,0
+1778328045307,9,GET /api/schedules/test-data (requires token),200,,Thread Group 1-1,text,true,,764,401,1,1,http://localhost:8081/api/schedules/test-data,9,0,1
+1778328045317,8,"GET /api/admin/users (admin, requires token)",200,,Thread Group 1-1,text,true,,1124,393,1,1,http://localhost:8081/api/admin/users,8,0,0
+1778328045326,10,"GET /api/admin/users/{id} (admin, requires token)",404,,Thread Group 1-1,text,false,,828,395,1,1,http://localhost:8081/api/admin/users/5,10,0,1
+1778328045337,9,GET /api/v1/room-occupancies/room/{roomId} (requires token),200,,Thread Group 1-1,text,true,,733,408,1,1,http://localhost:8081/api/v1/room-occupancies/room/4,9,0,1
+1778328045347,10,GET /api/v1/room-occupancies/room/{roomId}/semester/{semesterId} (requires token),200,,Thread Group 1-1,text,true,,684,419,1,1,http://localhost:8081/api/v1/room-occupancies/room/4/semester/4,9,0,1
+1778328045357,12,GET /api/v1/room-occupancies/semester/{semesterId} (requires token),200,,Thread Group 1-1,text,true,,733,412,1,1,http://localhost:8081/api/v1/room-occupancies/semester/4,11,0,1
+1778328045369,10,GET /api/v1/room-occupancies/semester/{semesterId}/statistics (requires token),200,,Thread Group 1-1,text,true,,919,423,1,1,http://localhost:8081/api/v1/room-occupancies/semester/4/statistics,10,0,1
+1778328045380,13,GET /api/v1/room-occupancies/check-availability (requires token),200,,Thread Group 1-1,text,true,,778,463,1,1,http://localhost:8081/api/v1/room-occupancies/check-availability?roomId=1&semesterId=4&dayOfWeek=2&period=1,13,0,0
+1778328045394,21,GET /api/v1/room-occupancies/rooms-status/semester/{semesterId} (requires token),200,,Thread Group 1-1,text,true,,6873,425,1,1,http://localhost:8081/api/v1/room-occupancies/rooms-status/semester/4,21,0,1
+1778328045416,16,GET /api/v1/room-occupancies/room/{roomId}/status/semester/{semesterId} (requires token),404,,Thread Group 1-1,text,false,,830,426,1,1,http://localhost:8081/api/v1/room-occupancies/room/4/status/semester/4,15,0,1
+1778328045433,74,GET /api/v1/room-occupancies/available-rooms (requires token),200,,Thread Group 1-1,text,true,,6873,451,1,1,http://localhost:8081/api/v1/room-occupancies/available-rooms?semesterId=4&dayOfWeek=2&period=1,74,0,1

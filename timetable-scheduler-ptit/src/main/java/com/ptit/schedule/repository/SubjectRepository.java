@@ -17,6 +17,8 @@ import java.util.Optional;
 
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
+
+    boolean existsBySubjectCode(String subjectCode);
     
     // Tìm tất cả subject theo major
     List<Subject> findByMajorId(Integer majorId);

@@ -1,4 +1,18 @@
-import axios from 'axios'
+import axios, { type AxiosRequestConfig } from 'axios'
+
+/**
+ * Upload multipart: gỡ Content-Type mặc định (application/json) của axios instance.
+ * Trình duyệt sẽ gửi multipart/form-data kèm boundary đúng — tránh lỗi parse phía Spring.
+ */
+export const multipartRequestConfig: Pick<AxiosRequestConfig, 'transformRequest'> = {
+  transformRequest: [
+    (data, headers) => {
+      const h = headers as Record<string, unknown>
+      if (h) delete h['Content-Type']
+      return data
+    },
+  ],
+}
 
 // Tự động detect API URL: sử dụng biến môi trường hoặc tự động detect
 const getApiBaseUrl = () => {
@@ -6,13 +20,18 @@ const getApiBaseUrl = () => {
   if (import.meta.env.VITE_API_BASE_URL) {
     return import.meta.env.VITE_API_BASE_URL
   }
-  
-  // Nếu đang development (localhost)
-  if (import.meta.env.DEV || window.location.hostname === 'localhost') {
-    return 'http://localhost:8081/api'
+
+  // Dev / preview Vite: cùng origin + proxy (vite.config) → không CORS, đúng cổng BE (8081)
+  if (import.meta.env.DEV) {
+    return '/api'
   }
-  
-  // Production: sử dụng cùng origin với frontend (relative path)
+
+  // Localhost khi build chạy qua vite preview có proxy /api → vẫn dùng relative
+  if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+    return '/api'
+  }
+
+  // Production: cùng origin (nginx / gateway forward /api)
   return '/api'
 }
 
@@ -460,11 +479,7 @@ export const curriculumService = {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('semester', semester)
-    return api.post<ApiResponse<ExcelImportResult>>('/subjects/upload-excel', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    return api.post<ApiResponse<ExcelImportResult>>('/subjects/upload-excel', formData, multipartRequestConfig)
   },
 }
 
@@ -472,20 +487,12 @@ export const scheduleValidationService = {
   validateFormat: (file: File) => {
     const formData = new FormData()
     formData.append('file', file)
-    return api.post<ApiResponse<boolean>>('/schedule-validation/validate-format', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    return api.post<ApiResponse<boolean>>('/schedule-validation/validate-format', formData, multipartRequestConfig)
   },
   analyzeSchedule: (file: File) => {
     const formData = new FormData()
     formData.append('file', file)
-    return api.post<ApiResponse<ScheduleValidationResult>>('/schedule-validation/analyze', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    return api.post<ApiResponse<ScheduleValidationResult>>('/schedule-validation/analyze', formData, multipartRequestConfig)
   },
   getConflictDetails: (type: string, room?: string, teacherId?: string) => {
     const params = new URLSearchParams()
