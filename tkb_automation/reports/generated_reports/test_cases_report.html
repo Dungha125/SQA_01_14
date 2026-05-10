@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bao cao Test - TKB Automation PTIT</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; color: #1a1a2e; }
+  .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 20px; }
+  .header h1 { font-size: 28px; margin-bottom: 8px; }
+  .header .subtitle { opacity: 0.8; font-size: 14px; }
+
+  /* Summary cards */
+  .summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-bottom: 20px; }
+  .card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center; }
+  .card .number { font-size: 36px; font-weight: 700; }
+  .card .label { font-size: 13px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+  .card.total .number { color: #3b82f6; }
+  .card.passed .number { color: #10b981; }
+  .card.functional .number { color: #8b5cf6; }
+  .card.db .number { color: #f59e0b; }
+
+  /* Module section */
+  .module-section { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px; }
+  .module-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; padding-bottom: 12px; border-bottom: 2px solid #e2e8f0; }
+  .module-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; color: white; }
+  .module-badge.login { background: #3b82f6; }
+  .module-badge.semesters { background: #10b981; }
+  .module-badge.rooms { background: #f59e0b; }
+  .module-badge.scheduling { background: #8b5cf6; }
+  .module-badge.ctdt { background: #ec4899; }
+  .module-badge.users { background: #14b8a6; }
+  .module-title { font-size: 18px; font-weight: 700; color: #1a1a2e; }
+  .module-count { font-size: 13px; color: #6b7280; margin-left: auto; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { background: #f8fafc; padding: 10px 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #e2e8f0; color: #475569; }
+  td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+  tr:hover { background: #f8fafc; }
+  tr:last-child td { border-bottom: none; }
+
+  /* Badges */
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .badge-func { background: #ede9fe; color: #5b21b6; }
+  .badge-db { background: #fef3c7; color: #92400e; }
+  .badge-passed { background: #d1fae5; color: #065f46; }
+  .badge-none { background: #f1f5f9; color: #64748b; }
+
+  /* TC ID */
+  .tc-id { font-family: 'Consolas', monospace; font-size: 12px; font-weight: 700; color: #3b82f6; }
+  .tc-name { font-weight: 600; color: #1e293b; }
+  .tc-desc { color: #475569; font-size: 13px; }
+
+  /* Module summary bar */
+  .module-summary { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+  .ms-item { background: white; border-radius: 8px; padding: 10px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 10px; }
+  .ms-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .ms-label { font-size: 13px; font-weight: 600; color: #475569; }
+  .ms-count { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+
+  /* Footer */
+  .footer { text-align: center; padding: 20px; color: #9ca3af; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Bao Cao Kiem Thu - He Thong Quan Ly TKB PTIT</h1>
+    <div class="subtitle">Ngay: 10/05/2026 | Tong so: 30 test cases | Framework: pytest + Selenium</div>
+  </div>
+
+  <!-- Summary cards -->
+  <div class="summary-cards">
+    <div class="card total">
+      <div class="number">30</div>
+      <div class="label">Tong so TC</div>
+    </div>
+    <div class="card passed">
+      <div class="number">6</div>
+      <div class="label">Modules</div>
+    </div>
+    <div class="card functional">
+      <div class="number">21</div>
+      <div class="label">Functional</div>
+    </div>
+    <div class="card db">
+      <div class="number">13</div>
+      <div class="label">DB Write</div>
+    </div>
+  </div>
+
+  <!-- Module summary bar -->
+  <div class="module-summary">
+    <div class="ms-item">
+      <div class="ms-dot" style="background:#3b82f6;"></div>
+      <span class="ms-label">Dang nhap</span>
+      <span class="ms-count">3 TC</span>
+    </div>
+    <div class="ms-item">
+      <div class="ms-dot" style="background:#10b981;"></div>
+      <span class="ms-label">Hoc ky</span>
+      <span class="ms-count">6 TC</span>
+    </div>
+    <div class="ms-item">
+      <div class="ms-dot" style="background:#f59e0b;"></div>
+      <span class="ms-label">Phong hoc</span>
+      <span class="ms-count">6 TC</span>
+    </div>
+    <div class="ms-item">
+      <div class="ms-dot" style="background:#8b5cf6;"></div>
+      <span class="ms-label">Lap lich</span>
+      <span class="ms-count">6 TC</span>
+    </div>
+    <div class="ms-item">
+      <div class="ms-dot" style="background:#ec4899;"></div>
+      <span class="ms-label">Mon hoc</span>
+      <span class="ms-count">6 TC</span>
+    </div>
+    <div class="ms-item">
+      <div class="ms-dot" style="background:#14b8a6;"></div>
+      <span class="ms-label">Nguoi dung</span>
+      <span class="ms-count">6 TC</span>
+    </div>
+  </div>
+
+  <!-- ==================== MODULE: DANG NHAP ==================== -->
+  <div class="module-section">
+    <div class="module-header">
+      <span class="module-badge login">Dang Nhap</span>
+      <span class="module-title">Dang nhap he thong / Login</span>
+      <span class="module-count">3 test cases</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:80px;">TC ID</th>
+          <th>Tieu de</th>
+          <th style="width:100px;">Loai</th>
+          <th>Thu muc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tc-id">DN-01</td>
+          <td>
+            <div class="tc-name">Dang nhap voi thong tin hop le thanh cong</div>
+            <div class="tc-desc">Dang nhap bang tai khoan admin hop le, he thong chuyen huong thanh cong</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_login.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">DN-02</td>
+          <td>
+            <div class="tc-name">Nut Dang Nhap duoc phep bam</div>
+            <div class="tc-desc">Khi trang tai, nut Dang Nhap duoc phep bam (khong bi disable)</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_login.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">DN-03</td>
+          <td>
+            <div class="tc-name">Trang dang nhap tai thanh cong voi cac thanh phan</div>
+            <div class="tc-desc">Trang dang nhap hien thi day du cac thanh phan: Username, Password, Nut Dang Nhap</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_login.py</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== MODULE: HOC KY ==================== -->
+  <div class="module-section">
+    <div class="module-header">
+      <span class="module-badge semesters">Hoc Ky</span>
+      <span class="module-title">Quan ly hoc ky / Semester Management</span>
+      <span class="module-count">6 test cases</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:80px;">TC ID</th>
+          <th>Tieu de</th>
+          <th style="width:100px;">Loai</th>
+          <th>Thu muc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tc-id">HK-01</td>
+          <td>
+            <div class="tc-name">Them hoc ky moi thanh cong</div>
+            <div class="tc-desc">Them hoc ky voi thong tin day du (ten, nam, ngay bd, ngay kt), hoc ky xuat hien trong bang</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_semesters.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">HK-02</td>
+          <td>
+            <div class="tc-name">Hoc ky vua them co trong bang</div>
+            <div class="tc-desc">Sau khi them, hoc ky co trong bang danh sach va tieu de trang la "Quan ly hoc ky"</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_semesters.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">HK-03</td>
+          <td>
+            <div class="tc-name">Xoa hoc ky thanh cong</div>
+            <div class="tc-desc">Xoa hoc ky da co, xac nhan xoa, hoc ky bi xoa khoi bang</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_semesters.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">HK-04</td>
+          <td>
+            <div class="tc-name">Huy xoa hoc ky thi hoc ky van con</div>
+            <div class="tc-desc">Khi pop-up xac nhan xuat hien, bam Huy, hoc ky van con trong bang</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_semesters.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">HK-05</td>
+          <td>
+            <div class="tc-name">Them hoc ky khong dien truong bat buoc thi hien loi</div>
+            <div class="tc-desc">Them hoc ky khong dien ten (truong bat buoc), he thong hien thi thong bao loi</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_semesters.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">HK-06</td>
+          <td>
+            <div class="tc-name">Dong modal thi modal dong</div>
+            <div class="tc-desc">Mo form them hoc ky, bam Dong/Huy, modal dong thanh cong</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_semesters.py</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== MODULE: PHONG HOC ==================== -->
+  <div class="module-section">
+    <div class="module-header">
+      <span class="module-badge rooms">Phong Hoc</span>
+      <span class="module-title">Quan ly phong hoc / Room Management</span>
+      <span class="module-count">6 test cases</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:80px;">TC ID</th>
+          <th>Tieu de</th>
+          <th style="width:100px;">Loai</th>
+          <th>Thu muc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tc-id">PH-01</td>
+          <td>
+            <div class="tc-name">Them phong hoc moi thanh cong</div>
+            <div class="tc-desc">Them phong hoc voi ma P101, toa, suc chua, tang, loai phong, phong xuat hien trong bang</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_rooms.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">PH-02</td>
+          <td>
+            <div class="tc-name">Phong vua them co trong bang</div>
+            <div class="tc-desc">Sau khi them, phong co trong bang va tieu de trang la "Quan ly phong hoc"</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_rooms.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">PH-03</td>
+          <td>
+            <div class="tc-name">Xoa phong hoc thanh cong</div>
+            <div class="tc-desc">Xoa phong da co, xac nhan xoa, phong bi xoa khoi bang</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_rooms.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">PH-04</td>
+          <td>
+            <div class="tc-name">Tim kiem phong hoc theo ma</div>
+            <div class="tc-desc">Them phong P102, tim kiem theo ma P102, chi phong P102 hien thi trong bang</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_rooms.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">PH-05</td>
+          <td>
+            <div class="tc-name">Them phong trung ma thi hien loi</div>
+            <div class="tc-desc">Them phong P103, sau do them lai P103 cung toa, he thong hien thi thong bao loi trung ma</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_rooms.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">PH-06</td>
+          <td>
+            <div class="tc-name">Dong modal thi modal dong</div>
+            <div class="tc-desc">Mo form them phong hoc, bam Dong/Huy, modal dong thanh cong</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_rooms.py</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== MODULE: LAP LICH ==================== -->
+  <div class="module-section">
+    <div class="module-header">
+      <span class="module-badge scheduling">Lap Lich</span>
+      <span class="module-title">Lap lich thoi khoa bieu / Scheduling</span>
+      <span class="module-count">6 test cases</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:80px;">TC ID</th>
+          <th>Tieu de</th>
+          <th style="width:100px;">Loai</th>
+          <th>Thu muc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tc-id">LL-01</td>
+          <td>
+            <div class="tc-name">Trang lap lich tai thanh cong</div>
+            <div class="tc-desc">Truy cap trang lap lich, tieu de trang la "Tao Thoi khoa bieu"</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_scheduling.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">LL-02</td>
+          <td>
+            <div class="tc-name">Cac dropdown loc deu co mat</div>
+            <div class="tc-desc">Trang lap lich hien thi it nhat 3 dropdown loc (Nam, Hoc ky, Loai hinh)</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_scheduling.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">LL-03</td>
+          <td>
+            <div class="tc-name">Nut Sinh TKB disabled khi chua co du lieu</div>
+            <div class="tc-desc">Khi chua chon nam/hoc ky/loai hinh, nut "Sinh TKB" bi disabled</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_scheduling.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">LL-04</td>
+          <td>
+            <div class="tc-name">Mo modal upload thanh cong</div>
+            <div class="tc-desc">Mo modal upload file Excel, modal hien thi dung</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_scheduling.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">LL-05</td>
+          <td>
+            <div class="tc-name">Tai file mau thanh cong</div>
+            <div class="tc-desc">Tai file mau Excel tu modal upload, file duoc tai ve thanh cong</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_scheduling.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">LL-06</td>
+          <td>
+            <div class="tc-name">Chuoi loc hoat dong dung thu tu (Nam -> Hoc ky -> Loai hinh)</div>
+            <div class="tc-desc">Chon Nam, Hoc ky, Loai hinh theo dung thu tu, cac dropdown lien quan hoat dong</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_scheduling.py</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== MODULE: MON HOC ==================== -->
+  <div class="module-section">
+    <div class="module-header">
+      <span class="module-badge ctdt">Mon Hoc</span>
+      <span class="module-title">Quan ly mon hoc / Chuong trinh dao tao (CTDT)</span>
+      <span class="module-count">6 test cases</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:80px;">TC ID</th>
+          <th>Tieu de</th>
+          <th style="width:100px;">Loai</th>
+          <th>Thu muc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tc-id">CT-01</td>
+          <td>
+            <div class="tc-name">Trang quan ly mon hoc tai thanh cong</div>
+            <div class="tc-desc">Truy cap trang quan ly mon hoc, tieu de trang la "Quan ly Mon hoc"</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_ctdt.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">CT-02</td>
+          <td>
+            <div class="tc-name">Bang mon hoc co tieu de cot</div>
+            <div class="tc-desc">Bang danh sach mon hoc co tieu de cot (Ma mon, Ten mon, So tin chi...)</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_ctdt.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">CT-03</td>
+          <td>
+            <div class="tc-name">Mo modal them mon hoc thanh cong</div>
+            <div class="tc-desc">Bam nut Them mon hoc, modal form mo ra</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_ctdt.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">CT-04</td>
+          <td>
+            <div class="tc-name">Them mon hoc moi thanh cong</div>
+            <div class="tc-desc">Dien ma M001, ten "Toan roi rac", 3 tin chi, submit, mon xuat hien trong bang</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_ctdt.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">CT-05</td>
+          <td>
+            <div class="tc-name">Xoa mon hoc thanh cong</div>
+            <div class="tc-desc">Xoa mon hoc M001, xac nhan xoa, mon bi xoa khoi bang</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_ctdt.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">CT-06</td>
+          <td>
+            <div class="tc-name">Tim kiem mon hoc theo ma hoac ten</div>
+            <div class="tc-desc">Tim kiem theo ma M001, ket qua tra ve chinh xac</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_ctdt.py</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== MODULE: NGUOI DUNG ==================== -->
+  <div class="module-section">
+    <div class="module-header">
+      <span class="module-badge users">Nguoi Dung</span>
+      <span class="module-title">Quan ly nguoi dung / User Management</span>
+      <span class="module-count">6 test cases</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:80px;">TC ID</th>
+          <th>Tieu de</th>
+          <th style="width:100px;">Loai</th>
+          <th>Thu muc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tc-id">ND-01</td>
+          <td>
+            <div class="tc-name">Trang quan ly nguoi dung tai thanh cong</div>
+            <div class="tc-desc">Truy cap trang quan ly nguoi dung, tieu de trang la "Quan ly nguoi dung"</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_users.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">ND-02</td>
+          <td>
+            <div class="tc-name">Bang nguoi dung co tieu de cot</div>
+            <div class="tc-desc">Bang danh sach nguoi dung co tieu de cot (Ho ten, Email, Vai tro...)</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_users.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">ND-03</td>
+          <td>
+            <div class="tc-name">Cac tab loc hoat dong</div>
+            <div class="tc-desc">Cac tab loc: Tat ca, Dang hoat dong, Khong hoat dong deu chuyen tab duoc</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_users.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">ND-04</td>
+          <td>
+            <div class="tc-name">Vo hieu hoa nguoi dung thanh cong</div>
+            <div class="tc-desc">Vo hieu hoa mot nguoi dung, nguoi dung chuyen sang trang thai Khong hoat dong</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_users.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">ND-05</td>
+          <td>
+            <div class="tc-name">Kich hoat nguoi dung thanh cong</div>
+            <div class="tc-desc">Kich hoat lai nguoi dung da bi vo hieu hoa, nguoi dung tro ve trang thai Hoat dong</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span><br><span class="badge badge-db">DB Write</span></td>
+          <td><span class="badge badge-none">tests/test_users.py</span></td>
+        </tr>
+        <tr>
+          <td class="tc-id">ND-06</td>
+          <td>
+            <div class="tc-name">Bang co du lieu (so dong lon hon 0)</div>
+            <div class="tc-desc">Khi co nguoi dung trong he thong, bang hien thi du lieu</div>
+          </td>
+          <td><span class="badge badge-func">Functional</span></td>
+          <td><span class="badge badge-none">tests/test_users.py</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    TKB Automation Framework | PTIT | Generated: 2026-05-10
+  </div>
+</div>
+</body>
+</html>

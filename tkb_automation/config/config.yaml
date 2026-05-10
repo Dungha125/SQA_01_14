@@ -1,0 +1,47 @@
+app:
+  base_url: "http://localhost:3000"
+  api_base_url: "http://localhost:8081/api/v1"
+  headless: false
+  timeout: 15
+  implicit_wait: 5
+  window_width: 1920
+  window_height: 1080
+  screenshot_on_failure: true
+
+database:
+  host: "localhost"
+  port: 3306
+  user: "root"
+  password: "password"
+  database: "schedule"
+  charset: "utf8mb4"
+
+auth:
+  username: "admin"
+  password: "admin123"
+  login_endpoint: "/api/auth/login"
+
+browser:
+  default: "chrome"
+  headless: false
+  download_dir: "downloads"
+  drivers:
+    chrome: ""
+    firefox: ""
+    edge: ""
+
+reporting:
+  html_report_dir: "reports/generated_reports"
+  allure_results_dir: "reports/allure-results"
+  screenshot_dir: "reports/screenshots"
+  log_dir: "logs"
+  include_screenshots: true
+  include_page_source: false
+
+parallel:
+  max_workers: 4
+  enabled: true
+
+retry:
+  max_attempts: 1
+  enabled: false

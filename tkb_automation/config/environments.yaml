@@ -1,0 +1,16 @@
+# Environment: Development
+app:
+  base_url: "http://localhost:3000"
+  api_base_url: "http://localhost:8081/api/v1"
+  headless: false
+
+database:
+  host: "localhost"
+  port: 3306
+  user: "root"
+  password: "password"
+  database: "schedule"
+
+auth:
+  username: "admin"
+  password: "admin123"
